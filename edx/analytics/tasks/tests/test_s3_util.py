@@ -101,10 +101,6 @@ class ScalableS3ClientTestCase(unittest.TestCase):
     """Tests for ScalableS3Client class."""
 
     def setUp(self):
-        patcher = patch('luigi.s3.boto')
-        patcher.start()
-        self.addCleanup(patcher.stop)
-
         self.client = s3_util.ScalableS3Client()
 
     def _assert_get_chunk_specs(self, source_size_bytes, expected_num_chunks, expected_chunk_size):

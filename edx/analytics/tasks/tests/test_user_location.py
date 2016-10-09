@@ -311,7 +311,6 @@ class UsersPerCountryReportWorkflowTestCase(BaseUserLocationEventTestCase):
         with patch('edx.analytics.tasks.user_location.pygeoip') as mock_pygeoip:
             mock_pygeoip.GeoIP = Mock(return_value=FakeGeoLocation())
             worker.run()
-        worker.stop()
 
         output_lines = []
         with open(report_path) as report_file:

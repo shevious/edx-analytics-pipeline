@@ -1,7 +1,6 @@
 """Test selection of event log files."""
 
 import datetime
-
 from mock import patch
 
 from luigi.date_interval import Month
@@ -97,8 +96,8 @@ class PathSelectionByDateIntervalTaskTest(unittest.TestCase):
     def test_default_pattern(self):
         task = PathSelectionByDateIntervalTask(interval=Month.parse('2014-03'))
         self.assertEquals(task.pattern, (
-            r'.*tracking.log-(?P<date>\d{8}).*\.gz',
-            r'.*tracking.notalog-(?P<date>\d{8}).*\.gz',
+            r'.*tracking.log-(?P<date>\\d{8}).*\\.gz',
+            r'.*tracking.notalog-(?P<date>\\d{8}).*\\.gz',
         ))
 
     def test_filtering_of_urls(self):
@@ -172,14 +171,14 @@ class PathSelectionByDateIntervalTaskTest(unittest.TestCase):
             'FakeServerGroup/tracking.log-20140401-1395254574.gz',
         ])
 
-    @with_luigi_config('event-logs', 'pattern', 'foobar')
+    @with_luigi_config('event-logs', 'pattern', '["foobar"]')
     def test_pattern_from_config(self):
         task = PathSelectionByDateIntervalTask(
             interval=Month.parse('2014-03')
         )
         self.assertEquals(task.pattern, ('foobar',))
 
-    @with_luigi_config('event-logs', 'pattern', ['foobar'])
+    @with_luigi_config('event-logs', 'pattern', '["foobar"]')
     def test_pattern_override(self):
         task = PathSelectionByDateIntervalTask(
             interval=Month.parse('2014-03'),
