@@ -964,7 +964,7 @@ class ImportCourseSummaryEnrollmentsIntoMysql(CourseSummaryEnrollmentDownstreamM
                 warehouse_path=self.warehouse_path,
                 api_root_url=self.api_root_url,
                 api_page_size=self.api_page_size,
-                overwrite=self.overwrite,
+                # overwrite=self.overwrite,
             ),
         ]
 
@@ -996,7 +996,7 @@ class ImportEnrollmentsIntoMysql(CourseSummaryEnrollmentDownstreamMixin,
             'date': self.date,
             'api_root_url': self.api_root_url,
             'api_page_size': self.api_page_size,
-            'overwrite': self.overwrite,  # for enrollment
+            # 'overwrite': self.overwrite,  # for enrollment
             'enable_course_catalog': self.enable_course_catalog,
         }, **enrollment_kwargs)
 
